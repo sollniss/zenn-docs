@@ -1,0 +1,252 @@
+9:05 AM - 9:30 AM PDT   (25 min)
+The Go Cryptography State of the Union
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+The world of cryptography is undergoing changes faster than it ever did in most of our careers, but the Go cryptography maintainers are working to keep your applications secure with the least possible amount of disruption.
+
+We’ll talk about our new ML-DSA package and how we test it, about how we are preparing for the post-quantum transition, about the new HPKE package, about randomness and entropy, about secure erasure of ephemeral secrets with runtime/secret, and about a nuanced and complex security issue in crypto/tls we’ve had to deal with.
+
+This is your yearly appointment to learn about the progress of Go’s cryptography libraries, and the techniques we use to maintain them.
+
+Talk/Attendee Level: All Attendees
+Filippo Valsorda
+Founder
+Geomys
+Speaker
+
+
+
+
+9:35 AM - 10:00 AM PDT   (25 min)
+What slog Left on the Table
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+In 2023, Go 1.21 officially introduced the log/slog package, real structured logging in the standard library that many of us had been waiting years for. It covers the fundamentals well, but there are gaps that can become painful in real-world, large-scale systems. This talk explores two extensions, built on the slog.Handler interface, that fill some of those gaps. Some Gophers might even argue they should be part of the log/slog package itself.
+
+First, a custom slog.Handler implementation that integrates slog with testing.T, routing the logs to the test's output. This has the nice effect of suppressing log noise during passing tests while surfacing full "production" logs on failure. We will cover the handler code itself, then dive into several tricky edge cases and how they were addressed.
+
+Second, a dynamic per-component log leveling system that lets you change the log verbosity for individual components or subsystems at runtime, with no restarts and no performance penalty. If you've ever enabled DEBUG logging for your service to troubleshoot an issue and been buried in an avalanche of logs completely obscuring the ones you care about, you won't want to miss this.
+
+Talk/Attendee Level: All Attendees
+Dylan Bourque
+Staff Engineer
+CoreWeave
+Speaker
+
+
+
+
+10:05 AM - 10:30 AM PDT   (25 min)
+Parsing Protobuf as Fast as Possible
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Protobuf is an extremely popular binary data interchange format. This session dives into hyperpb, a Protobuf parser for Go that uses every trick in the book, and some new ones, to achieve the highest throughout possible. We'll talk about table-driven parsing, the parser paradigm used by hyperpb, and hyperpb's innovations on the concept. We'll also take a look at the high-level architecture of hyperpb, including its compiler, parser VM, and layout optimizations.
+
+Talk/Attendee Level: Advanced
+Sunny Young de la Sota
+Engineer
+Buf Technologies
+Speaker
+
+
+
+
+11:15 AM - 11:45 AM PDT   (30 min)
+From Go to Factorio: What Games Can Teach Us About Compilers
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Go's compiler quietly transforms every program into a form most developers never see. What if you could not just see it, but play with it? This talk turns a hidden layer of Go into a living, ticking factory. The factory must grow.
+
+Talk/Attendee Level: All Attendees
+Simon Li
+Software Engineer
+Meta
+Speaker
+
+
+
+
+11:45 AM - 12:10 PM PDT   (25 min)
+Sandboxing DuckDB with io/fs
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Go programs that embed C libraries face a hidden trap: the C library brings its own I/O stack. It doesn't know about your credentials, your TLS configuration, your request tracing, or your retry logic. It just reaches out to the network or disk on its own terms. You end up with two parallel I/O systems in the same binary, and they will drift apart in ways that are hard to debug and expensive to maintain.
+
+DuckDB is a great example. It is one of the most useful embedded databases available today, and many Go programs are starting to use it. But DuckDB ships extensions like httpfs and aws that perform network I/O directly from C++. If your Go program wraps those extensions, you have lost observability, lost credential management, and lost the ability to apply standard Go middleware to the database's I/O operations.
+
+The solution is simpler than it looks. Go's io/fs interface, introduced in 1.16, gives us a clean, composable abstraction for read-only file systems. Most C libraries that do I/O support some form of virtual file system hook. If you can connect those two things, you can route all of the library's I/O back through the Go runtime, and suddenly every cloud SDK, every telemetry wrapper, every retry policy you have already written becomes available to the database too.
+
+This talk teaches you how to do that. We will walk through the split stack problem in concrete terms, look at how DuckDB's virtual file system API works, and build a mental model of the bridge: a small C++ extension that intercepts DuckDB's file operations and forwards them to a Go function that satisfies io/fs. By the end, you will understand the pattern well enough to apply it to other C libraries, and you will learn about an open-source library that does it for DuckDB today.
+
+Talk/Attendee Level: Advanced
+Achille Roussel
+Co-founder & CTO
+Firetiger
+Speaker
+
+
+
+12:15 PM - 12:40 PM PDT   (25 min)
+Receipts from the Go Linker: Auditing the Cost of Dependencies
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Every import statement is a transaction, but most of us never check the receipt.
+
+In this talk, we'll follow your dependencies from go.mod all the way to compiled symbols, uncovering what the Go linker actually pulls into your binary, where Dead Code Elimination saves you, and where it fails. Along the way, we'll expose the patterns secretly inflating your binary size and explain why that bloat even matters.
+
+Whether you're a library maintainer, a product engineer, or both, you'll walk away with a toolkit for evaluating dependencies so your binaries stay lean.
+
+Talk/Attendee Level: All Attendees
+Mikayla Toffler
+Software Engineer
+Datadog
+Speaker
+
+
+
+
+1:25 PM - 2:10 PM PDT   (45 min)
+Lightning Talks
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Perform Inference Directly in Your Go Applications with Kronk | Bill Kennedy, Ardan Labs
+
+Abstract: Self-hosted inference — running models on hardware you control — means no per-token costs, no data leaving your environment, no vendor lock-in, and access to the long tail of open-source models that go well beyond the LLMs everyone is talking about. And contrary to popular belief, you don't need a GPU rack: small models like Qwen3.5-0.8B-Q8_0 run comfortably on the same laptop you're using right now. The hard part has been doing it from Go without CGO, Python, or a network hop to something like Ollama.
+
+ In this lighting talk I will show you how you can use Kronk to perform inference directly in your go applications.
+
+Talk/Attendee Level: All Attendees
+
+
+A Small Update About TinyGo | Ron Evans, The Hybrid Group
+
+Abstract: The latest and greatest about TinyGo, the Go compiler for the smallest of places.
+
+Talk/Attendee Level: All Attendees
+
+
+Creating a full desktop environment with Go! | Andrew Williams, Apptrix.ai
+
+Abstract: What if you could be using Go to build apps on your laptop - what if the entire desktop was written with Go? This presentation highlights the benefits and beauty of a desktop environment created purely with Go. This whistle-stop tour of a massive topic covers lots of tantalising details, providing some code snippets and lots of screenshots to illustrate the topic. We leave with a "try it out and contribute" call to action and a great reveal. 🙂
+
+Talk/Attendee Level: All Attendees
+
+
+Nip the Nits in the Bud | Garrett Denis, Skool
+
+Abstract: Repeated "nit" comments - line wrapping, formatting, style preferences - are easy to follow but tedious to enforce by hand, and every one of them steals reviewer attention from correctness, design, and risk. In this lightning talk I'll turn one real nit from our codebase - enforcing one clause per line in boolean conditionals - into a custom Go linter using `go/analysis`, complete with an auto-fix and golangci-lint integration, in a single worked example. The point isn't the rule, it's that the  pattern is repeatable. If a style choice is objective and recurring, it belongs in tooling, not a review thread. As AI assistants generate ever more code, codifying your team's conventions as lint rules is how you keep both humans and machines consistent - and keep review focused on what actually matters.
+
+Talk/Attendee Level: All Attendees
+
+
+AI is a Power-up, Not a Player | Seth Lumnah, Capital One
+
+Abstract: I maintain shared Go libraries used across a large organization, and the bottleneck has never been code—it's attention. Proposals pile up, PRs wait for review, and community updates never get written because compiling them takes too long. So I started writing agent skills: markdown files that point an AI at our style guide and tell it how to handle routine work. This talk tours the skills I actually use, the discipline that keeps reviews honest, and the foundation work that any maintainer can start tomorrow. AI is a power-up, not a player.
+
+Talk/Attendee Level:  All Attendees
+
+
+Safer Agent Infrastructure: Don't Give the Agent Your Keys! | Marc Dougherty, Go Team, Google
+
+Abstract: AI agents today are desktop software, acting directly with a user's credentials. This has led to auth token leaks and unexpected behaviors that reach the news. How can you avoid making the headlines? Better authentication, and management of delegated credentials is the first step. Learn some tactics for keeping the keys away from your agents, and other ways to make your agent infrastructure more mature (and a bit safer!).
+
+Talk/Attendee Level: Intermediate
+
+
+
+
+
+2:10 PM - 2:35 PM PDT   (25 min)
+Uber-Scale Changes: Managing Millions of Lines of Go
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Uber's Go Monorepo has 100M lines of Go, and it's growing faster than ever, with thousands of Gophers writing code.
+
+This talk highlights an essential part of maintaining such a large codebase - in particular, how our team makes "Uber-scale changes". Changes that span 10,000s of Go files in a large engineering organization, and how we automated that using AST transformation tools as well as AI.
+
+Talk/Attendee Level: Advanced
+Sung Whang
+Senior Staff Engineer, TLM
+Uber
+Speaker
+
+
+
+2:40 PM - 3:05 PM PDT   (25 min)
+Detect, Trace, Fix: Bringing AI-Powered Taint Analysis to gosec
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Go's tooling ecosystem is evolving beyond simply finding problems to automatically fixing them, but security analysis has lagged behind. In this session, we'll explore a new AI-ready taint analysis engine for gosec that traces untrusted data across an entire Go application, accurately detecting vulnerabilities such as SQL injection, command injection, path traversal, SSRF, XSS, and more.
+
+Attendees will learn how SSA- and call graph-based analysis makes data flow tracking practical in Go, how these techniques dramatically reduce false positives, and how the same architecture can power automated and AI-assisted remediation. See where Go security tooling is headed: from detecting vulnerabilities to tracing, understanding, and fixing them before they reach production.
+
+Talk/Attendee Level: All Attendees
+Ravi Sastry Kadali
+Staff AI/ML Engineer
+General Motors
+Speaker
+
+
+
+3:35 PM - 4:00 PM PDT   (25 min)
+Automation Tools for Large-Scale Go Code Transformations
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Maintaining velocity during large-scale code evolution requires moving beyond manual editing to automated, programmatic transformations. This presentation examines the techniques used to resolve complex merge conflicts and manage temporal LSCs, featuring case studies on refactoring the Go command’s module loader and the Go compiler's internal structures.
+
+Talk/Attendee Level: Intermediate
+Ian Alexander
+Software Engineer
+Google, Go Team
+Speaker
+
+
+
+4:05 PM - 4:30 PM PDT   (25 min)
+Chasing the Moon: Engineering a High-Performance Lua VM in Pure Go
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+Lua is widely used for embedded scripting, providing extensibility in systems such as Neovim, Redis, and Nginx. However, embedding C-based Lua implementations such as PUC Lua in Go introduces CGO build complexity and call overhead. Existing pure-Go implementations are easier to embed, but are typically 2–3 fold slower than PUC Lua and consume significantly more memory.
+
+This talk introduces a new pure-Go, register-based Lua VM that achieves performance within 30–50% of PUC Lua while remaining fully CGO-free. Rather than focusing solely on VM internals, the session uses the VM as a case study in high-performance Go systems programming, covering techniques applicable far beyond interpreter design including memory layout optimization, GCpressure reduction, elimination of hidden allocations, and construction of cache-friendly data structures.
+
+The talk will also demonstrate practical optimization workflows using Go benchmarks, CPU and memory profiling, escape analysis, and compiler inlining diagnostics.
+
+Talk/Attendee Level: All Attendees
+Salah Mahmud MD,PhD
+Director
+Palliser Analytics
+Speaker
+
+
+
+
+4:35 PM - 5:00 PM PDT   (25 min)
+Building a Durable Agent & MCP Execution Engine in Go
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+AI agents can call tools, invoke APIs, and connect to remote systems through the Model Context Protocol (MCP). But most agentic frameworks aren't durable - if the process crashes mid tool call, execution is lost, context is gone, and the agent starts over from scratch. That’s costly. MCP makes this worse: a tool call isn't always a single round-trip. Servers can pause execution mid-call to request user input (aka elicitation) or trigger an LLM completion (aka sampling). Both of these are interactions that can suspend for minutes before resuming. A simple retry loop can't model these human interactions required, or the durability to resume the agent loop.
+
+In this talk, we'll explore the fundamental building blocks backing our fully durable agent and MCP execution engine written in Go. We'll cover deterministic replay, checkpoint-based resumption, how the Virtual Actor pattern and Go’s primitives power the underlying durability engine, and how we embedded a transparent and built-in MCP durability worker.
+
+You'll leave with a concrete understanding of what durable execution actually means and looks like in Go for Agents and MCP, and why it's the right foundation you need to run in production in the AI era that we find ourselves in today.
+
+Talk/Attendee Level: All Attendees
+Samantha Kendziora
+Senior Software Engineer
+Diagrid
+Speaker
+
+
+
+5:00 PM - 5:45 PM PDT   (45 min)
+A Slice of Go's Future
+Finneran Ballroom 2, Level 5, SCC | Summit
+
+The Go ecosystem is evolving rapidly, driven by shifts in governance, security, and the rise of artificial intelligence. In this final session of GopherCon 2026, join the Go Team for a panel discussion that will address the community’s biggest questions, including:
+
+    A more open and scalable technical governance model that ensures the Go project’s longevity and adaptability to its community’s continuously changing needs.
+    How language preference and professional identity are evolving as AI tools proliferate in the industry.
+    The future of security with rapidly advancing AI models and concerns around post-quantum cryptography.
+
+Join the Go Team for a forward-looking, open discussion on the future of the project where your toughest questions will be answered.
