@@ -1,14 +1,7 @@
-Here are the slides for my talk about testing/synctest:
-https://evilmartians.com/events/gophercon-synctesting-concurrent-code-with-confidence
+https://github.com/gophercon/2026-talks
 
+https://github.com/gophercon/2026-talks/pull/3
 
+https://github.com/gophercon/2026-talks/pull/4
 
-Here are the slides for my lightning talk!
-Hope you are interested in coming to GopherCon Japan!
-https://speakerdeck.com/logica0419/the-journey-of-connecting-japan-to-the-global-go-community
-
-
-If anyone’s interested in testing/quick, property-based testing, or fuzzing, here are the slides from my lightning talk: https://docs.google.com/presentation/d/1Inr515gt994uwjEYqjNxc7GKnlSfg2-cR9utT1MuN_g/edit?usp=drivesdk
-
-
-https://docs.google.com/presentation/d/e/2PACX-1vRqnhc-Ad0PtI53U5gCGA8cXvmV_cNT4gRFZtMHu5pB2y5gi4SWH3XhqcpwDWWgzYxFXATDd6mHXEsa/pub?slide=id.g356a8fa959e_0_187 slide deck link for the Slices lightning talk
+https://github.com/siutsin/gofactos
